@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Teacher;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
 
 class StudentController extends Controller
 {
@@ -14,7 +15,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $students = User::where('permission', User::Student)->paginate(15);
+        return view('teacher.student.index')->withStudents($students);
     }
 
     /**

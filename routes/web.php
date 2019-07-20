@@ -30,6 +30,6 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
 Route::prefix('teacher')->middleware(['auth'])->group(function () {
     Route::resources([
-        'admin\students' => 'Admin\StudentController',
+        'students' => 'Teacher\StudentController',
     ]);
 });
