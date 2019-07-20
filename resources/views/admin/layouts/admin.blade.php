@@ -35,7 +35,30 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                         <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/admin') }}">{{ __('dashboard') }}</a>
+                        </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/admin/admins') }}">{{ __('Admins') }}</a>
+                        </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/admin/teachers') }}">{{ __('Teachers') }}</a>
+                        </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/admin/students') }}">{{ __('Students') }}</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/admin/courses') }}">{{ __('courses') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/admin/orders') }}">{{ __('orders') }}</a>
+                        </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/admin/categories') }}">{{ __('categories') }}</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/admin/transactions') }}">{{ __('transactions') }}</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -74,7 +97,6 @@
         </nav>
 
         <main class="py-4">
-            admin layouts
             @yield('content')
         </main>
     </div>

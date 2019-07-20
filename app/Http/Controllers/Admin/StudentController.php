@@ -16,7 +16,7 @@ class StudentController extends Controller
     public function index()
     {
         $students = User::where('permission', User::Student)->paginate(15);
-        return view('admin.student.index');
+        return view('admin.student.index')->withStudents($students);
     }
 
     /**

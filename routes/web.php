@@ -21,9 +21,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/', 'Admin\HomeController@index')->name('home.admin'); 
     Route::resources([
-            'admin\students' => 'Admin\StudentController',
-            'admin\admins' => 'Admin\AdminController',
-            'admin\teachers'=> 'Admin\TeacherController'
+            'students' => 'Admin\StudentController',
+            'admins' => 'Admin\AdminController',
+            'teachers'=> 'Admin\TeacherController'
         ]);
 });
 

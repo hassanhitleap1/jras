@@ -16,7 +16,7 @@ class TeacherController extends Controller
     public function index()
     {
         $teachers=User::where('permission',User::Teacher)->paginate(15);
-        return view('admin.teacher.index');
+        return view('admin.teacher.index')->withTeachers($teachers);
     }
 
     /**

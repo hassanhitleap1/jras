@@ -16,7 +16,7 @@ class AdminController extends Controller
     public function index()
     {
         $admins = User::where('permission', User::Admin)->paginate(15);
-        return view('admin.admin.index');
+        return view('admin.admin.index')->withAdmins($admins);
     }
 
     /**
