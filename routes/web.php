@@ -29,7 +29,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
 
 Route::prefix('teacher')->middleware(['auth'])->group(function () {
+    Route::get('/', 'Teacher\HomeController@index')->name('home.teacher'); 
     Route::resources([
         'students' => 'Teacher\StudentController',
+        'courses' => 'Teacher\CoursesController',
     ]);
 });
