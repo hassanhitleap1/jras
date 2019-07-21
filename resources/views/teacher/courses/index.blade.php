@@ -3,7 +3,10 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
+      <div class="float-left">
         <h1>courses</h1>
+      </div>
+        <div class="float-left"><a  href="{{asset('teacher/courses/create')}}"  class="btn btn-primary "> create</a></div><br>
         <table class="table">
   <thead>
     <tr>
@@ -24,7 +27,7 @@
             <td>{{$course->description}}</td>
             <td>{{$course->price}}</td>
             <td>{{$course->discount}}</td>
-           <td>action</td>
+           <td><a class="btn btn-primary" href="{{asset('teacher/courses/'.$course->id.'/edit')}}" role="button">Link</a></td>
             </tr> 
       @endforeach
  

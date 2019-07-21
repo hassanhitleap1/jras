@@ -27,7 +27,7 @@ class CoursesController extends Controller
      */
     public function create()
     {
-        //
+        return view('teacher.courses.create');
     }
 
     /**
@@ -38,7 +38,22 @@ class CoursesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'price'=> 'numeric',
+            'discount'=> 'numeric'
+        ]);
+
+      
+        $course= new Courses;
+        $course->title=$request->title;
+        $course->price = $request->price;
+        $course->description = $request->description;
+        $course->discount = $request->discount;
+        $course->created_by=Auth::id();
+        $course->save();
+        return redirect('/teacher/courses');
     }
 
     /**
@@ -47,9 +62,9 @@ class CoursesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,Courses $course)
     {
-        //
+        return view('teacher.courses.show')->withCourse($course);
     }
 
     /**
@@ -58,9 +73,9 @@ class CoursesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Courses $course)
     {
-        //
+        return view('teacher.courses.edit')->withCourse($course);
     }
 
     /**
@@ -70,9 +85,22 @@ class CoursesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id, Courses $course, Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'price' => 'numeric',
+            'discount' => 'numeric'
+        ]);
+        $course->title = $request->title;
+        $course->price = $request->price;
+        $course->description = $request->description;
+        $course->discount = $request->discount;
+        $course->created_by = Auth::id();
+
+        $course->save();
+        return redirect('/teacher/courses');
     }
 
     /**
@@ -81,8 +109,9 @@ class CoursesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Courses $course)
     {
-        //
+        $course->delete();
+        return redirect('/teacher/courses');
     }
 }
