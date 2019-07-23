@@ -38,6 +38,7 @@ class CoursesController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
             'title' => 'required',
             'description' => 'required',
@@ -49,8 +50,13 @@ class CoursesController extends Controller
         $course= new Courses;
         $course->title=$request->title;
         $course->price = $request->price;
-        $course->description = $request->description;
-        $course->discount = $request->discount;
+        if(isset($request->description)){
+            $course->description = $request->description;
+        }
+        if(isset($request->discount)){
+            $course->discount = $request->discount;
+        }
+    
         $course->created_by=Auth::id();
         $course->save();
         return redirect('/teacher/courses');
@@ -85,7 +91,7 @@ class CoursesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id, Courses $course, Request $request)
+    public function update( Courses $course, Request $request)
     {
         $request->validate([
             'title' => 'required',

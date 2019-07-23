@@ -18,8 +18,8 @@ class CreateCoursesTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->text('description');
-            $table->float('price')->default(null);
-            $table->float('discount')->default(null);
+            $table->float('price')->default(Courses::DefaultPrice);
+            $table->float('discount')->default(Courses::DefaultDiscount);
             $table->tinyInteger('created_by')->default(-1);
             $table->timestamps();
         });
