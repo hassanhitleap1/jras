@@ -7,6 +7,7 @@ use Faker\Generator as Faker;
 use App\Models\Courses;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Unit;
+use App\Models\Lessons;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,17 +48,17 @@ $factory->define(Unit::class, function (Faker $faker) {
     return [
         'title' => $faker->name,
         'sorting' => rand(0, 15),
-        'course_id' =>  factory(Courses::class)->create()->id,
-        'created_by' => factory(User::class)->create()->id,
+        'course_id' =>  Courses::all()->random()->id ,
+        'created_by' =>  User::all()->random()->id ,
     ];
 });
 
 
-$factory->define(Unit::class, function (Faker $faker) {
+$factory->define(Lessons::class, function (Faker $faker) {
     return [
         'title' => $faker->name,
         'content' => $faker->text(),
-        'unit_id' =>  factory(Unit::class)->create()->id,
-        'created_by' => factory(User::class)->create()->id,
+        'unit_id' =>  Unit::all()->random()->id,
+        'created_by' =>User::all()->random()->id,
     ];
 });

@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
             'permission' => User::Student,
             'password' => Hash::make('programerhk92'),
         ]);
-     
+        
         factory(App\User::class, 10)->create()->each(function ($user) {
            
         });
