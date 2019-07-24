@@ -1713,6 +1713,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -37015,30 +37027,103 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container mt-10" }, [
+    _c("h4", [_vm._v("unit")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-12" }, [
+      _c(
+        "div",
+        { staticClass: "col-md-12" },
+        _vm._l(10, function(n) {
+          return _c(
+            "div",
+            {
+              staticClass: "panel-group",
+              attrs: {
+                id: "accordion" + n,
+                role: "tablist",
+                "aria-multiselectable": "true"
+              }
+            },
+            [
+              _c("div", { staticClass: "panel panel-default" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "panel-heading",
+                    attrs: { role: "tab", id: "heading" + n }
+                  },
+                  [
+                    _c("h4", { staticClass: "panel-title" }, [
+                      _c(
+                        "a",
+                        {
+                          attrs: {
+                            role: "button",
+                            "data-toggle": "collapse",
+                            "data-parent": "#accordion" + n,
+                            href: "#collapse" + n,
+                            "aria-expanded": "true",
+                            "aria-controls": "collapse" + n
+                          }
+                        },
+                        [_vm._m(0, true)]
+                      )
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._m(1, true)
+              ])
+            ]
+          )
+        }),
+        0
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              )
-            ])
+    return _c("div", {}, [
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "email",
+          id: "exampleInputEmail1",
+          "aria-describedby": "emailHelp",
+          placeholder: "Enter email"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "panel-collapse collapse in",
+        attrs: {
+          id: "collapseOne2",
+          role: "tabpanel",
+          "aria-labelledby": "headingOne2"
+        }
+      },
+      [
+        _c("div", { staticClass: "panel-body" }, [
+          _c("p", [
+            _vm._v(
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl lorem, dictum id pellentesque at, vestibulum ut arcu. Curabitur erat libero, egestas eu tincidunt ac, rutrum ac justo. Vivamus condimentum laoreet lectus, blandit posuere tortor aliquam vitae. Curabitur molestie eros. "
+            )
           ])
         ])
-      ])
-    ])
+      ]
+    )
   }
 ]
 render._withStripped = true
