@@ -1749,13 +1749,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      collapse: false,
       title: "",
       desc: "",
       sorting: "",
       lessons: {},
+      lessontitle: "",
       units: [{
         "title": "this is",
         "desc": "dsdsd",
@@ -1774,26 +1784,49 @@ __webpack_require__.r(__webpack_exports__);
           "desc": "dsdsd",
           "sorting": 1
         }]
-      }, {
-        "title": "this is",
-        "desc": "dsdsd",
-        "sorting": 3
       }]
     };
+  },
+  computed: {
+    isCollapsed: function isCollapsed(i) {
+      if (this.collapse) {
+        return "fas fa-minus-square";
+      } else {
+        return "fas fa-plus";
+      }
+    }
   },
   mounted: function mounted() {
     console.log('Component mounted.');
   },
   methods: {
-    addlesson: function addlesson() {
+    addUnit: function addUnit() {
+      if (this.title == "") {
+        return true;
+      }
+
       this.units.push({
         "title": this.title,
         "desc": this.desc,
         "sorting": 1,
         "lessons": this.lesson
       });
+      this.title = "";
+    },
+    addlesson: function addlesson(i) {
+      if (this.lessontitle == "") {
+        return true;
+      }
+
+      this.units[i].lessons.push({
+        "title": this.lessontitle,
+        "desc": "dsdsd",
+        "sorting": 1
+      });
+      this.lessontitle = "";
     }
-  }
+  } // <i class="fas fa-minus-square"></i>
+
 });
 
 /***/ }),
@@ -37123,7 +37156,7 @@ var render = function() {
                           staticClass: "fas fa-plus",
                           on: {
                             click: function($event) {
-                              return _vm.addlesson()
+                              return _vm.addUnit()
                             }
                           }
                         })
@@ -37156,7 +37189,7 @@ var render = function() {
                               ) {
                                 return null
                               }
-                              return _vm.addlesson()
+                              return _vm.addUnit()
                             },
                             input: function($event) {
                               if ($event.target.composing) {
@@ -37244,22 +37277,14 @@ var render = function() {
                     _c(
                       "div",
                       { staticClass: "panel-body" },
-                      _vm._l(unit.lessons, function(lesson) {
-                        return _c("div", { staticClass: "row" }, [
+                      [
+                        _c("div", { staticClass: "row" }, [
                           _c("div", { staticClass: "col-md-1 offset-md-1" }, [
                             _c("span", {
-                              staticClass: "fas fa-plus",
-                              attrs: {
-                                role: "button",
-                                "data-toggle": "collapse",
-                                "data-parent": "#accordion2",
-                                href: "#collapse" + i,
-                                "aria-expanded": "true",
-                                "aria-controls": "collapseOne"
-                              },
+                              class: "fas fa-plus",
                               on: {
                                 click: function($event) {
-                                  return _vm.addLesson(i)
+                                  return _vm.addlesson(i)
                                 }
                               }
                             })
@@ -37267,17 +37292,70 @@ var render = function() {
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-8" }, [
                             _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.lessontitle,
+                                  expression: "lessontitle"
+                                }
+                              ],
                               staticClass: "form-control",
                               attrs: {
                                 type: "text",
                                 placeholder: "add new unit"
                               },
-                              domProps: { value: unit.title }
+                              domProps: { value: _vm.lessontitle },
+                              on: {
+                                keyup: function($event) {
+                                  if (
+                                    !$event.type.indexOf("key") &&
+                                    _vm._k(
+                                      $event.keyCode,
+                                      "enter",
+                                      13,
+                                      $event.key,
+                                      "Enter"
+                                    )
+                                  ) {
+                                    return null
+                                  }
+                                  return _vm.addlesson(i)
+                                },
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.lessontitle = $event.target.value
+                                }
+                              }
                             })
                           ])
-                        ])
-                      }),
-                      0
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(unit.lessons, function(lesson) {
+                          return _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-md-1 offset-md-1" }, [
+                              _c("a", {
+                                staticClass: "far fa-eye",
+                                attrs: { href: "#" }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-8" }, [
+                              _c("input", {
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  placeholder: "add new unit"
+                                },
+                                domProps: { value: lesson.title }
+                              })
+                            ])
+                          ])
+                        })
+                      ],
+                      2
                     )
                   ]
                 )

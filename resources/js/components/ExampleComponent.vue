@@ -9,10 +9,10 @@
                             <h4 class="panel-title">
                               <div class="row">
                                     <div class="col-md-1">
-                                        <span class="fas fa-plus" @click="addlesson()"></span>
+                                        <span class="fas fa-plus" @click="addUnit()"></span>
                                     </div>
                                     <div class="col-md-10 ">
-                                        <input type="text" class="form-control" v-model="title" placeholder="add new unit " @keyup.enter="addlesson()">
+                                        <input type="text" class="form-control" v-model="title" placeholder="add new unit " @keyup.enter="addUnit()">
                                     </div>
                                </div>
                             </h4>
@@ -33,12 +33,20 @@
                         </div>
                         <div :id="'collapse'+i" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne2" >
                             <div class="panel-body">
+                                <div class="row" >
+                                        <div class="col-md-1 offset-md-1">
+                                            <span   @click="addlesson(i)" :class="'fas fa-plus'"></span>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="text" class="form-control"placeholder="add new unit" v-model="lessontitle" @keyup.enter="addlesson(i)">
+                                        </div>
+                                </div>
                                 <div class="row" v-for="lesson in unit.lessons">
                                     <div class="col-md-1 offset-md-1">
-                                        <span  role="button" @click="addLesson(i)" data-toggle="collapse" data-parent="#accordion2" :href="'#collapse'+i" aria-expanded="true" aria-controls="collapseOne" class="fas fa-plus"></span>
+                                        <a :href="'#'"  class="far fa-eye"></a>
                                     </div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control" :value="unit.title" placeholder="add new unit">
+                                        <input type="text" class="form-control" :value="lesson.title" placeholder="add new unit">
                                     </div>
                                </div>
                             </div>
@@ -54,23 +62,45 @@
     export default {
         data() {
             return {
+                collapse:false,
                 title:"",
                 desc:"",
                 sorting:"",
                 lessons:{},
+                lessontitle:"",
                units:[{"title":"this is","desc":"dsdsd","sorting":1 ,"lessons":[{"title":"this is","desc":"dsdsd","sorting":1} ]   },
-                    {"title":"this is","desc":"dsdsd","sorting":2 ,"lessons":[{"title":"this is","desc":"dsdsd","sorting":1}]},
-                    {"title":"this is","desc":"dsdsd","sorting":3}] 
+                    {"title":"this is","desc":"dsdsd","sorting":2 ,"lessons":[{"title":"this is","desc":"dsdsd","sorting":1}]}] 
+            }
+        },computed: {
+                isCollapsed(i){
+                if(this.collapse){
+                    return "fas fa-minus-square";
+                }else{
+                  return "fas fa-plus" ;
+                }
             }
         },
         mounted() {
+        
             console.log('Component mounted.')
         },methods: {
-            addlesson(){
-             this.units.push({"title":this.title,"desc":this.desc,"sorting":1 ,"lessons": this.lesson})
-              
-            }
+            addUnit(){
+                if(this.title == ""){
+                    return true;
+                }
+
+            this.units.push({"title":this.title,"desc":this.desc,"sorting":1 ,"lessons": this.lesson})
+            this.title="";
+            },
+            addlesson(i){
+                if(this.lessontitle == ""){
+                    return true;
+                }
+                  this.units[i].lessons.push({"title":this.lessontitle,"desc":"dsdsd","sorting":1});
+                  this.lessontitle="";
+            },  
         },
 
     }
+    // <i class="fas fa-minus-square"></i>
 </script>
