@@ -1735,22 +1735,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      title: "",
+      desc: "",
+      sorting: "",
+      lessons: {},
       units: [{
         "title": "this is",
         "desc": "dsdsd",
         "sorting": 1,
         "lessons": [{
-          "title": "this is",
-          "desc": "dsdsd",
-          "sorting": 1
-        }, {
-          "title": "this is",
-          "desc": "dsdsd",
-          "sorting": 1
-        }, {
           "title": "this is",
           "desc": "dsdsd",
           "sorting": 1
@@ -1760,14 +1770,6 @@ __webpack_require__.r(__webpack_exports__);
         "desc": "dsdsd",
         "sorting": 2,
         "lessons": [{
-          "title": "this is",
-          "desc": "dsdsd",
-          "sorting": 1
-        }, {
-          "title": "this is",
-          "desc": "dsdsd",
-          "sorting": 1
-        }, {
           "title": "this is",
           "desc": "dsdsd",
           "sorting": 1
@@ -1783,7 +1785,14 @@ __webpack_require__.r(__webpack_exports__);
     console.log('Component mounted.');
   },
   methods: {
-    addLesson: function addLesson(i) {}
+    addlesson: function addlesson() {
+      this.units.push({
+        "title": this.title,
+        "desc": this.desc,
+        "sorting": 1,
+        "lessons": this.lesson
+      });
+    }
   }
 });
 
@@ -37098,8 +37107,8 @@ var render = function() {
               "aria-multiselectable": "true"
             }
           },
-          _vm._l(_vm.units, function(unit, i) {
-            return _c("div", { staticClass: "panel panel-default" }, [
+          [
+            _c("div", { staticClass: "panel panel-default" }, [
               _c(
                 "div",
                 {
@@ -37112,17 +37121,9 @@ var render = function() {
                       _c("div", { staticClass: "col-md-1" }, [
                         _c("span", {
                           staticClass: "fas fa-plus",
-                          attrs: {
-                            role: "button",
-                            "data-toggle": "collapse",
-                            "data-parent": "#accordion2",
-                            href: "#collapse" + i,
-                            "aria-expanded": "true",
-                            "aria-controls": "collapseOne"
-                          },
                           on: {
                             click: function($event) {
-                              return _vm.addLesson(i)
+                              return _vm.addlesson()
                             }
                           }
                         })
@@ -37130,33 +37131,60 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-10 " }, [
                         _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.title,
+                              expression: "title"
+                            }
+                          ],
                           staticClass: "form-control",
-                          attrs: { type: "text", placeholder: "add new unit" },
-                          domProps: { value: unit.title }
+                          attrs: { type: "text", placeholder: "add new unit " },
+                          domProps: { value: _vm.title },
+                          on: {
+                            keyup: function($event) {
+                              if (
+                                !$event.type.indexOf("key") &&
+                                _vm._k(
+                                  $event.keyCode,
+                                  "enter",
+                                  13,
+                                  $event.key,
+                                  "Enter"
+                                )
+                              ) {
+                                return null
+                              }
+                              return _vm.addlesson()
+                            },
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.title = $event.target.value
+                            }
+                          }
                         })
                       ])
                     ])
                   ])
                 ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "panel-collapse collapse in",
-                  attrs: {
-                    id: "collapse" + i,
-                    role: "tabpanel",
-                    "aria-labelledby": "headingOne2"
-                  }
-                },
-                [
-                  _c(
-                    "div",
-                    { staticClass: "panel-body" },
-                    _vm._l(unit.lessons, function(lesson) {
-                      return _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-md-1 offset-md-1" }, [
+              )
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.units, function(unit, i) {
+              return _c("div", { staticClass: "panel panel-default" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "panel-heading",
+                    attrs: { role: "tab", id: "headingOne" }
+                  },
+                  [
+                    _c("h4", { staticClass: "panel-title" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-md-1" }, [
                           _c("span", {
                             staticClass: "fas fa-plus",
                             attrs: {
@@ -37166,34 +37194,97 @@ var render = function() {
                               href: "#collapse" + i,
                               "aria-expanded": "true",
                               "aria-controls": "collapseOne"
-                            },
-                            on: {
-                              click: function($event) {
-                                return _vm.addLesson(i)
-                              }
                             }
                           })
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "col-md-8" }, [
+                        _c("div", { staticClass: "col-md-10 " }, [
                           _c("input", {
                             staticClass: "form-control",
                             attrs: {
                               type: "text",
-                              placeholder: "add new unit"
+                              placeholder: "add new unit "
                             },
-                            domProps: { value: unit.title }
+                            domProps: { value: unit.title },
+                            on: {
+                              keyup: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "enter",
+                                    13,
+                                    $event.key,
+                                    "Enter"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.addlesson()
+                              }
+                            }
                           })
                         ])
                       ])
-                    }),
-                    0
-                  )
-                ]
-              )
-            ])
-          }),
-          0
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "panel-collapse collapse in",
+                    attrs: {
+                      id: "collapse" + i,
+                      role: "tabpanel",
+                      "aria-labelledby": "headingOne2"
+                    }
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "panel-body" },
+                      _vm._l(unit.lessons, function(lesson) {
+                        return _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-md-1 offset-md-1" }, [
+                            _c("span", {
+                              staticClass: "fas fa-plus",
+                              attrs: {
+                                role: "button",
+                                "data-toggle": "collapse",
+                                "data-parent": "#accordion2",
+                                href: "#collapse" + i,
+                                "aria-expanded": "true",
+                                "aria-controls": "collapseOne"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.addLesson(i)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-8" }, [
+                            _c("input", {
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                placeholder: "add new unit"
+                              },
+                              domProps: { value: unit.title }
+                            })
+                          ])
+                        ])
+                      }),
+                      0
+                    )
+                  ]
+                )
+              ])
+            })
+          ],
+          2
         )
       ])
     ])

@@ -4,15 +4,29 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default" >
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                              <div class="row">
+                                    <div class="col-md-1">
+                                        <span class="fas fa-plus" @click="addlesson()"></span>
+                                    </div>
+                                    <div class="col-md-10 ">
+                                        <input type="text" class="form-control" v-model="title" placeholder="add new unit " @keyup.enter="addlesson()">
+                                    </div>
+                               </div>
+                            </h4>
+                        </div>
+                    </div>
                     <div class="panel panel-default" v-for="(unit,i) in units">
                         <div class="panel-heading" role="tab" id="headingOne">
                             <h4 class="panel-title">
                               <div class="row">
                                     <div class="col-md-1">
-                                        <span  role="button" @click="addLesson(i)" data-toggle="collapse" data-parent="#accordion2" :href="'#collapse'+i" aria-expanded="true" aria-controls="collapseOne" class="fas fa-plus"></span>
+                                        <span  role="button"  data-toggle="collapse" data-parent="#accordion2" :href="'#collapse'+i" aria-expanded="true" aria-controls="collapseOne" class="fas fa-plus"></span>
                                     </div>
                                     <div class="col-md-10 ">
-                                        <input type="text" class="form-control" :value="unit.title" placeholder="add new unit">
+                                        <input type="text" class="form-control" :value="unit.title" placeholder="add new unit " @keyup.enter="addlesson()">
                                     </div>
                                </div>
                             </h4>
@@ -40,16 +54,21 @@
     export default {
         data() {
             return {
-               units:[{"title":"this is","desc":"dsdsd","sorting":1 ,"lessons":[{"title":"this is","desc":"dsdsd","sorting":1}, {"title":"this is","desc":"dsdsd","sorting":1},{"title":"this is","desc":"dsdsd","sorting":1}   ]   },
-                    {"title":"this is","desc":"dsdsd","sorting":2 ,"lessons":[{"title":"this is","desc":"dsdsd","sorting":1},{"title":"this is","desc":"dsdsd","sorting":1},{"title":"this is","desc":"dsdsd","sorting":1}]},
+                title:"",
+                desc:"",
+                sorting:"",
+                lessons:{},
+               units:[{"title":"this is","desc":"dsdsd","sorting":1 ,"lessons":[{"title":"this is","desc":"dsdsd","sorting":1} ]   },
+                    {"title":"this is","desc":"dsdsd","sorting":2 ,"lessons":[{"title":"this is","desc":"dsdsd","sorting":1}]},
                     {"title":"this is","desc":"dsdsd","sorting":3}] 
             }
         },
         mounted() {
             console.log('Component mounted.')
         },methods: {
-            addLesson(i){
-               
+            addlesson(){
+             this.units.push({"title":this.title,"desc":this.desc,"sorting":1 ,"lessons": this.lesson})
+              
             }
         },
 
