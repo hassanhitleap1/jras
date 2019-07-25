@@ -1725,9 +1725,65 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      units: [{
+        "title": "this is",
+        "desc": "dsdsd",
+        "sorting": 1,
+        "lessons": [{
+          "title": "this is",
+          "desc": "dsdsd",
+          "sorting": 1
+        }, {
+          "title": "this is",
+          "desc": "dsdsd",
+          "sorting": 1
+        }, {
+          "title": "this is",
+          "desc": "dsdsd",
+          "sorting": 1
+        }]
+      }, {
+        "title": "this is",
+        "desc": "dsdsd",
+        "sorting": 2,
+        "lessons": [{
+          "title": "this is",
+          "desc": "dsdsd",
+          "sorting": 1
+        }, {
+          "title": "this is",
+          "desc": "dsdsd",
+          "sorting": 1
+        }, {
+          "title": "this is",
+          "desc": "dsdsd",
+          "sorting": 1
+        }]
+      }, {
+        "title": "this is",
+        "desc": "dsdsd",
+        "sorting": 3
+      }]
+    };
+  },
   mounted: function mounted() {
     console.log('Component mounted.');
+  },
+  methods: {
+    addLesson: function addLesson(i) {}
   }
 });
 
@@ -37031,101 +37087,119 @@ var render = function() {
     _c("h4", [_vm._v("unit")]),
     _vm._v(" "),
     _c("div", { staticClass: "col-md-12" }, [
-      _c(
-        "div",
-        { staticClass: "col-md-12" },
-        _vm._l(10, function(n) {
-          return _c(
-            "div",
-            {
-              staticClass: "panel-group",
-              attrs: {
-                id: "accordion" + n,
-                role: "tablist",
-                "aria-multiselectable": "true"
-              }
-            },
-            [
-              _c("div", { staticClass: "panel panel-default" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "panel-heading",
-                    attrs: { role: "tab", id: "heading" + n }
-                  },
-                  [
-                    _c("h4", { staticClass: "panel-title" }, [
-                      _c(
-                        "a",
-                        {
+      _c("div", { staticClass: "col-md-12" }, [
+        _c(
+          "div",
+          {
+            staticClass: "panel-group",
+            attrs: {
+              id: "accordion2",
+              role: "tablist",
+              "aria-multiselectable": "true"
+            }
+          },
+          _vm._l(_vm.units, function(unit, i) {
+            return _c("div", { staticClass: "panel panel-default" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "panel-heading",
+                  attrs: { role: "tab", id: "headingOne" }
+                },
+                [
+                  _c("h4", { staticClass: "panel-title" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-1" }, [
+                        _c("span", {
+                          staticClass: "fas fa-plus",
                           attrs: {
                             role: "button",
                             "data-toggle": "collapse",
-                            "data-parent": "#accordion" + n,
-                            href: "#collapse" + n,
+                            "data-parent": "#accordion2",
+                            href: "#collapse" + i,
                             "aria-expanded": "true",
-                            "aria-controls": "collapse" + n
+                            "aria-controls": "collapseOne"
+                          },
+                          on: {
+                            click: function($event) {
+                              return _vm.addLesson(i)
+                            }
                           }
-                        },
-                        [_vm._m(0, true)]
-                      )
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-10 " }, [
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: { type: "text", placeholder: "add new unit" },
+                          domProps: { value: unit.title }
+                        })
+                      ])
                     ])
-                  ]
-                ),
-                _vm._v(" "),
-                _vm._m(1, true)
-              ])
-            ]
-          )
-        }),
-        0
-      )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "panel-collapse collapse in",
+                  attrs: {
+                    id: "collapse" + i,
+                    role: "tabpanel",
+                    "aria-labelledby": "headingOne2"
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "panel-body" },
+                    _vm._l(unit.lessons, function(lesson) {
+                      return _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-md-1 offset-md-1" }, [
+                          _c("span", {
+                            staticClass: "fas fa-plus",
+                            attrs: {
+                              role: "button",
+                              "data-toggle": "collapse",
+                              "data-parent": "#accordion2",
+                              href: "#collapse" + i,
+                              "aria-expanded": "true",
+                              "aria-controls": "collapseOne"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.addLesson(i)
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-8" }, [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              placeholder: "add new unit"
+                            },
+                            domProps: { value: unit.title }
+                          })
+                        ])
+                      ])
+                    }),
+                    0
+                  )
+                ]
+              )
+            ])
+          }),
+          0
+        )
+      ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", {}, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: {
-          type: "email",
-          id: "exampleInputEmail1",
-          "aria-describedby": "emailHelp",
-          placeholder: "Enter email"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "panel-collapse collapse in",
-        attrs: {
-          id: "collapseOne2",
-          role: "tabpanel",
-          "aria-labelledby": "headingOne2"
-        }
-      },
-      [
-        _c("div", { staticClass: "panel-body" }, [
-          _c("p", [
-            _vm._v(
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl lorem, dictum id pellentesque at, vestibulum ut arcu. Curabitur erat libero, egestas eu tincidunt ac, rutrum ac justo. Vivamus condimentum laoreet lectus, blandit posuere tortor aliquam vitae. Curabitur molestie eros. "
-            )
-          ])
-        ])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
