@@ -23,7 +23,7 @@
                             <h4 class="panel-title">
                               <div class="row">
                                     <div class="col-md-1">
-                                        <span  role="button"  data-toggle="collapse" data-parent="#accordion2" :href="'#collapse'+i" aria-expanded="true" aria-controls="collapseOne" class="fas fa-plus"></span>
+                                        <span  role="button"  @click="unit.collapse=!unit.collapse" data-toggle="collapse" data-parent="#accordion2" :href="'#collapse'+i" aria-expanded="true" aria-controls="collapseOne" :class="whatClass(i)"></span>
                                     </div>
                                     <div class="col-md-10 ">
                                         <input type="text" class="form-control" :value="unit.title" placeholder="add new unit " @keyup.enter="addlesson()">
@@ -35,7 +35,7 @@
                             <div class="panel-body">
                                 <div class="row" >
                                         <div class="col-md-1 offset-md-1">
-                                            <span   @click="addlesson(i)" :class="'fas fa-plus'"></span>
+                                            <span   @click="addlesson(i)" :class="'isCollapsed(i)'"></span>
                                         </div>
                                         <div class="col-md-8">
                                             <input type="text" class="form-control"placeholder="add new unit" v-model="lessontitle" @keyup.enter="addlesson(i)">
@@ -68,20 +68,13 @@
                 sorting:"",
                 lessons:{},
                 lessontitle:"",
-               units:[{"title":"this is","desc":"dsdsd","sorting":1 ,"lessons":[{"title":"this is","desc":"dsdsd","sorting":1} ]   },
-                    {"title":"this is","desc":"dsdsd","sorting":2 ,"lessons":[{"title":"this is","desc":"dsdsd","sorting":1}]}] 
+               units:[{"title":"this is","desc":"dsdsd","sorting":1 ,"lessons":[{"title":"this is","desc":"dsdsd","sorting":1} ] ,"collapse":false },
+                    {"title":"this is","desc":"dsdsd","sorting":2 ,"lessons":[{"title":"this is","desc":"dsdsd","sorting":1}] ,"collapse":false}] 
             }
         },computed: {
-                isCollapsed(i){
-                if(this.collapse){
-                    return "fas fa-minus-square";
-                }else{
-                  return "fas fa-plus" ;
-                }
-            }
+             
         },
         mounted() {
-        
             console.log('Component mounted.')
         },methods: {
             addUnit(){
@@ -89,7 +82,7 @@
                     return true;
                 }
 
-            this.units.push({"title":this.title,"desc":this.desc,"sorting":1 ,"lessons": this.lesson})
+            this.units.push({"title":this.title,"desc":this.desc,"sorting":1 ,"lessons": this.lesson ,"collapse":false})
             this.title="";
             },
             addlesson(i){
@@ -98,7 +91,14 @@
                 }
                   this.units[i].lessons.push({"title":this.lessontitle,"desc":"dsdsd","sorting":1});
                   this.lessontitle="";
-            },  
+            }, 
+            whatClass(i){
+                if(this.units[i].collapse){
+                    return "fas fa-minus-square";
+                }else{
+                  return "fas fa-plus" ;
+                }
+            }
         },
 
     }

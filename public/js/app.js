@@ -1774,7 +1774,8 @@ __webpack_require__.r(__webpack_exports__);
           "title": "this is",
           "desc": "dsdsd",
           "sorting": 1
-        }]
+        }],
+        "collapse": false
       }, {
         "title": "this is",
         "desc": "dsdsd",
@@ -1783,19 +1784,12 @@ __webpack_require__.r(__webpack_exports__);
           "title": "this is",
           "desc": "dsdsd",
           "sorting": 1
-        }]
+        }],
+        "collapse": false
       }]
     };
   },
-  computed: {
-    isCollapsed: function isCollapsed(i) {
-      if (this.collapse) {
-        return "fas fa-minus-square";
-      } else {
-        return "fas fa-plus";
-      }
-    }
-  },
+  computed: {},
   mounted: function mounted() {
     console.log('Component mounted.');
   },
@@ -1809,7 +1803,8 @@ __webpack_require__.r(__webpack_exports__);
         "title": this.title,
         "desc": this.desc,
         "sorting": 1,
-        "lessons": this.lesson
+        "lessons": this.lesson,
+        "collapse": false
       });
       this.title = "";
     },
@@ -1824,6 +1819,13 @@ __webpack_require__.r(__webpack_exports__);
         "sorting": 1
       });
       this.lessontitle = "";
+    },
+    whatClass: function whatClass(i) {
+      if (this.units[i].collapse) {
+        return "fas fa-minus-square";
+      } else {
+        return "fas fa-plus";
+      }
     }
   } // <i class="fas fa-minus-square"></i>
 
@@ -37219,7 +37221,7 @@ var render = function() {
                       _c("div", { staticClass: "row" }, [
                         _c("div", { staticClass: "col-md-1" }, [
                           _c("span", {
-                            staticClass: "fas fa-plus",
+                            class: _vm.whatClass(i),
                             attrs: {
                               role: "button",
                               "data-toggle": "collapse",
@@ -37227,6 +37229,11 @@ var render = function() {
                               href: "#collapse" + i,
                               "aria-expanded": "true",
                               "aria-controls": "collapseOne"
+                            },
+                            on: {
+                              click: function($event) {
+                                unit.collapse = !unit.collapse
+                              }
                             }
                           })
                         ]),
@@ -37281,7 +37288,7 @@ var render = function() {
                         _c("div", { staticClass: "row" }, [
                           _c("div", { staticClass: "col-md-1 offset-md-1" }, [
                             _c("span", {
-                              class: "fas fa-plus",
+                              class: "isCollapsed(i)",
                               on: {
                                 click: function($event) {
                                   return _vm.addlesson(i)
